@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "301511788769",
+    "firebase_url": "https://vtracking-abecb.firebaseio.com",
+    "project_id": "vtracking-abecb",
+    "storage_bucket": "vtracking-abecb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:301511788769:android:8866b3cebd20bbae",
+        "android_client_info": {
+          "package_name": "com.faceidentification.vikas.v_tracking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "301511788769-d4ikebko6p3d3832r81tjovi5ijojnmd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.faceidentification.vikas.v_tracking",
+            "certificate_hash": "87d2c6ecb425152bfc79f64abae544bb4cad1581"
+          }
+        },
+        {
+          "client_id": "301511788769-3son817bsjg31f7j47femqkl093eivpa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7DgVyOnVfQVAVDKzLirA_X6QwqjkeYmg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "301511788769-3son817bsjg31f7j47femqkl093eivpa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
