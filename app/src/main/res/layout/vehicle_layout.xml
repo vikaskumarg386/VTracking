@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
 
     <TextView
         android:id="@+id/vehicleNo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp"
         android:text="vehicleNo"
-        android:textSize="24sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/userName"
@@ -20,13 +22,24 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/vehicleNo"
         android:text="TextView"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
     <View
+        android:id="@+id/view"
         android:layout_width="wrap_content"
         android:layout_height="0.5dp"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/userName"
         android:layout_marginEnd="13dp"
         android:background="@android:color/background_dark" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/view"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="306dp"
+        android:visibility="visible"
+        app:srcCompat="@drawable/vehicle" />
 </RelativeLayout>

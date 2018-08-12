@@ -43,6 +43,7 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".Address_Activity"></activity>
+        <service android:name=".MyServices" android:exported="false" />
     </application>
 
 </manifest>

@@ -8,6 +8,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.test.mock.MockPackageManager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -34,13 +35,16 @@ public class MainActivity extends AppCompatActivity {
     private TextView addName;
     private Button button;
     private Button logOut;
+    private Button button2;
     private GPSTracker gps;
     private static final int REQUEST_CODE_PERMISSION=2;
     private String mPermission= Manifest.permission.ACCESS_FINE_LOCATION;
 
     private FirebaseAuth auth;
     private String id;
-
+    private String ownerId;
+    private double latitude;
+    private double longitude;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +60,10 @@ public class MainActivity extends AppCompatActivity {
         addCity=findViewById(R.id.addCity);
         addPostalCode =findViewById(R.id.addCode);
         addName=findViewById(R.id.addName);
+        button2=findViewById(R.id.button2);
         auth=FirebaseAuth.getInstance();
         id=FirebaseAuth.getInstance().getCurrentUser().getUid();
+        startService(new Intent(this, MyServices.class));
         try{
             if (ActivityCompat.checkSelfPermission(this,mPermission)!= MockPackageManager.PERMISSION_GRANTED){
                 ActivityCompat.requestPermissions(this,new String[]{mPermission},REQUEST_CODE_PERMISSION);
@@ -69,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
 
         gps=new GPSTracker(MainActivity.this);
         if (gps.canGetLocation()){
-            double latitude=gps.getLatitude();
-            double longitude=gps.getLongitude();
+            latitude=gps.getLatitude();
+            longitude=gps.getLongitude();
             FirebaseDatabase.getInstance().getReference().child("user"+id).child("longitude").setValue(String.valueOf(longitude));
             FirebaseDatabase.getInstance().getReference().child("user"+id).child("latitude").setValue(String.valueOf(latitude));
             textView.setText(latitude+"  "+longitude);
@@ -127,6 +133,32 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        FirebaseDatabase.getInstance().getReference().child("user"+FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ownerId=dataSnapshot.child("ownerId").getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!TextUtils.isEmpty(ownerId)){
+                Intent intent=new Intent(MainActivity.this,MapsActivity.class);
+                intent.putExtra("AllVehicle","AllVehicle");
+                intent.putExtra("ownerId",ownerId);
+                intent.putExtra("latitude", latitude);
+                intent.putExtra("longitude", longitude);
+
+                startActivity(intent);}
+            }
+        });
+
+
         logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
             if (auth==null){
            Intent intent=new Intent(MainActivity.this,WelcomePage_Activity.class);
             startActivity(intent);

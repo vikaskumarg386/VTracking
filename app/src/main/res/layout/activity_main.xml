@@ -11,7 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/button"
         android:layout_margin="8dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="invisible"
+        android:id="@+id/linearLayout4">
 
         <TextView
             android:id="@+id/add"
@@ -68,7 +70,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView"
-        android:text="update location to database" />
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/colorPrimary"
+        android:text="update location to database"
+        android:textColor="@android:color/white" />
 
     <Button
         android:id="@+id/logOutUser"
@@ -78,6 +84,30 @@
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
         android:layout_marginBottom="15dp"
-        android:text="log out" />
+        android:background="@color/colorPrimary"
+        android:text="log out"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/logOutUser"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="82dp"
+        android:layout_marginLeft="20dp"
+        android:background="@color/colorPrimary"
+        android:text="See location in map" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/button2"
+        android:layout_below="@+id/linearLayout4"
+        android:text="Your location is tracked by your owner\n you can see your location and other vehicle location by clicking below button"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

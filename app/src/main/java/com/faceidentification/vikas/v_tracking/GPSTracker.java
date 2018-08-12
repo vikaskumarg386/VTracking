@@ -29,8 +29,8 @@ public class GPSTracker implements LocationListener {
     private double longitude;
     private double latitude;
 
-    private static final long MIN_DIS_FOR_UPDATES=10;
-    private static final long MIN_TIME_BW_UPADTE=10;
+    private static final long MIN_DIS_FOR_UPDATES=0;
+    private static final long MIN_TIME_BW_UPADTE=1000;
     protected LocationManager locationManager;
 
     public GPSTracker(Context mContext) {

@@ -56,6 +56,7 @@ public class Register_Admin_Activity extends AppCompatActivity {
 
                                           Intent intent = new Intent(Register_Admin_Activity.this, AdminPage_Activity.class);
                                           startActivity(intent);
+                                          finish();
                                           progressDialog.dismiss();
                                       }
                                   }

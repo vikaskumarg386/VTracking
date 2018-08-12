@@ -10,56 +10,115 @@
         android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="8dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="18dp"
         android:background="@color/colorPrimary"
         android:text="See in Map"
         android:textColor="@android:color/white" />
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="310dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/address_"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Address" />
+            android:text="Address"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/addCity_"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="City" />
+            android:text="City"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/addState_"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="State" />
+            android:text="State"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:id="@+id/addCountry_"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Country" />
+            android:text="Country"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/addCode_"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Postale Code" />
-
-        <TextView
-            android:id="@+id/addName_"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Name" />
+            android:text="Postale Code"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/vehicleImage"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:adjustViewBounds="true"
+        android:cropToPadding="true"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/vehicle" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/linearLayout3"
+        android:layout_below="@+id/addName_"
+        android:layout_marginTop="73dp"
+        android:text="Current Location"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_below="@+id/vehicleImage"
+        android:layout_marginTop="13dp"
+        android:text="Driver name"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/addName_"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView9"
+        android:layout_below="@+id/textView9"
+        android:text="TextView"
+        android:textColor="@android:color/black" />
+
+    <ImageButton
+        android:id="@+id/changeImage"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/vehicleImage"
+        android:layout_alignEnd="@+id/map"
+        android:background="@drawable/shape"
+        app:srcCompat="@drawable/ic_mode_edit_black_24dp" />
+
 </RelativeLayout>

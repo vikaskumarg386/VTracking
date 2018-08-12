@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ public class AdminPage_Activity extends AppCompatActivity {
     private Button getLocation;
     private String latitude,longitude;
     private String id;
+    private String name;
     private RecyclerView recyclerView;
     private DatabaseReference mRef;
 
@@ -41,8 +43,8 @@ public class AdminPage_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_page_);
 
-        vehicle=findViewById(R.id.vehicleN);
-        getLocation=findViewById(R.id.getLocation);
+        //vehicle=findViewById(R.id.vehicleN);
+        //getLocation=findViewById(R.id.getLocation);
         recyclerView=findViewById(R.id.adminRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(AdminPage_Activity.this));
@@ -50,45 +52,6 @@ public class AdminPage_Activity extends AppCompatActivity {
          mRef=FirebaseDatabase.getInstance().getReference().child("admin"+FirebaseAuth.getInstance().getCurrentUser().getUid());
 
 
-        getLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                FirebaseDatabase.getInstance().getReference().child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(vehicle.getText().toString()).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        id=dataSnapshot.child("userRefKey").getValue().toString();
-
-                        FirebaseDatabase.getInstance().getReference().child("user"+id).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                latitude=dataSnapshot.child("latitude").getValue().toString();
-                                longitude=dataSnapshot.child("longitude").getValue().toString();
-                               // Toast.makeText(AdminPage_Activity.this,longitude+"  "+latitude,Toast.LENGTH_SHORT).show();
-                                Intent intent=new Intent(AdminPage_Activity.this,MapsActivity.class);
-                                intent.putExtra("latitude",latitude);
-                                intent.putExtra("longitude",longitude);
-                                startActivity(intent);
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
-
-
-            }
-        });
 
         showList();
     }
@@ -112,10 +75,13 @@ public class AdminPage_Activity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull vehicleViewHolder holder, int position, @NonNull final vehicle model) {
                final String ref=getRef(position).getKey();
+               name=model.getName();
                 holder.vehicleNo.setText(ref);
                 holder.userName.setText(model.getName());
+                holder.imageView.setVisibility(View.INVISIBLE);
 
                 if(!ref.equals("admin")) {
+                    holder.imageView.setVisibility(View.VISIBLE);
                     holder.view.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -128,6 +94,8 @@ public class AdminPage_Activity extends AppCompatActivity {
                                     Intent intent = new Intent(AdminPage_Activity.this, Address_Activity.class);
                                     intent.putExtra("latitude", latitude);
                                     intent.putExtra("longitude", longitude);
+                                    intent.putExtra("name",name);
+                                    intent.putExtra("vehicleNumber",ref);
                                     startActivity(intent);
                                 }
 
@@ -169,6 +137,12 @@ public class AdminPage_Activity extends AppCompatActivity {
                  Intent intent=new Intent(AdminPage_Activity.this,WelcomePage_Activity.class);
                  startActivity(intent);
                  finish();
+                 break;
+             }
+             case R.id.allVehicleMap:{
+                 Intent intent=new Intent(AdminPage_Activity.this,MapsActivity.class);
+                 intent.putExtra("AllVehicle","AllVehicle");
+                 startActivity(intent);
              }
 
          }
@@ -190,12 +164,14 @@ public class AdminPage_Activity extends AppCompatActivity {
     public static class vehicleViewHolder extends RecyclerView.ViewHolder{
 
         TextView vehicleNo,userName;
+        ImageView imageView;
         View view;
         public vehicleViewHolder(View itemView) {
             super(itemView);
             this.view=itemView;
             vehicleNo=itemView.findViewById(R.id.vehicleNo);
             userName=itemView.findViewById(R.id.userName);
+            imageView=itemView.findViewById(R.id.imageView);
         }
     }
 }

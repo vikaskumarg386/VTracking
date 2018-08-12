@@ -61,7 +61,9 @@
         android:layout_marginStart="14dp"
         android:layout_marginTop="20dp"
         android:text="Login Admin"
-        android:textSize="18sp" />
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/newAdmin"

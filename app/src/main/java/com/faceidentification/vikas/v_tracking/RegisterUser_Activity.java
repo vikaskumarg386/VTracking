@@ -33,6 +33,8 @@ public class RegisterUser_Activity extends AppCompatActivity {
     private String adminId,adminPass;
     private String adminRefKey;
     private String userRefKey;
+    private String ownerLat;
+    private String ownerLng;
 
 
     @Override
@@ -60,6 +62,12 @@ public class RegisterUser_Activity extends AppCompatActivity {
             }
         });
 
+        GPSTracker ownerGps=new GPSTracker(RegisterUser_Activity.this);
+        if(ownerGps.canGetLocation()){
+            ownerLat=String.valueOf(ownerGps.getLatitude());
+            ownerLng=String.valueOf(ownerGps.getLongitude());
+        }
+
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +79,7 @@ public class RegisterUser_Activity extends AppCompatActivity {
                 vehicle=vehicleNo.getText().toString();
                 pass=userPass.getText().toString();
                 id=userId.getText().toString();
-                Toast.makeText(RegisterUser_Activity.this,"button clicked",Toast.LENGTH_SHORT).show();
+               // Toast.makeText(RegisterUser_Activity.this,"button clicked",Toast.LENGTH_SHORT).show();
                 if (name!=null&&vehicle!=null&&pass!=null&&id!=null) {
                     vehicleNo.setText("");
                     userName.setText("");
@@ -92,9 +100,10 @@ public class RegisterUser_Activity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()){
                                             final Map map=new HashMap();
-                                            map.put("latitude","0.0");
-                                            map.put("longitude","0.0");
+                                            map.put("latitude",ownerLat);
+                                            map.put("longitude",ownerLng);
                                             map.put("vehicle",vehicle);
+                                            map.put("ownerId",adminRefKey);
                                             FirebaseDatabase.getInstance().getReference().child("user"+FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
@@ -105,7 +114,7 @@ public class RegisterUser_Activity extends AppCompatActivity {
                                                                 if (task.isSuccessful()){
                                                                     Toast.makeText(RegisterUser_Activity.this,"Saved",Toast.LENGTH_SHORT).show();
                                                                     Intent intent = new Intent(RegisterUser_Activity.this, RegisterUser_Activity.class);
-                                                                    startActivity(intent);
+                                                                    startActivity(intent);finish();
                                                                     progressDialog.dismiss();
                                                                 }
                                                             }
